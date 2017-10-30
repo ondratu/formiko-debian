@@ -6,12 +6,12 @@ Build-Depends: debhelper (>= 9), dh-python, python3, python3-setuptools
 Standards-Version: 3.9.8
 Homepage: https://github.com/ondratu/formiko
 X-Python3-Version: >= 3.2
-Vss-Git: https://github.com/ondratu/formiko-debian.git
+Vcs-Git: https://github.com/ondratu/formiko-debian.git
 Vcs-Browser: https://github.com/ondratu/formiko-debian
 Testsuite: autopkgtest-pkg-python
 
 Package: formiko
-Architecture: any
+Architecture: all
 Depends: ${python3:Depends}, ${misc:Depends},
     python3-gi, python3-docutils, gir1.2-gtksource-3.0, gir1.2-webkit2-4.0,
     python3-recommonmark
