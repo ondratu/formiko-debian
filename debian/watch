@@ -1,8 +1,5 @@
 # Compulsory line, this is a version 4 file
 version=4
 
-# PGP signature mangle, so foo.tar.gz has foo.tar.gz.sig
-#opts="pgpsigurlmangle=s%$%.sig%"
-
-# PyPI
+opts=uversionmangle=s/(rc|a|b|c)/~$1/,pgpsigurlmangle=s/$/.asc/ \
 https://pypi.debian.net/formiko/formiko-(.+)\.(?:zip|tgz|tbz|txz|(?:tar\.(?:gz|bz2|xz)))
