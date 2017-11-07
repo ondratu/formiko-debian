@@ -11,3 +11,4 @@ export PYBUILD_NAME=formiko
 override_dh_install:
 	dh_install
 	$(RM) $(CURDIR)/debian/formiko/usr/share/doc/formiko/COPYING
+	$(RM) $(CURDIR)/debian/formiko/usr/share/doc/formiko/ChangeLog
