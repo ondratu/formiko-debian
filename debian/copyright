@@ -3,8 +3,9 @@ Upstream-Name: formiko
 Source: https://github.com/ondratu/formiko
 
 Files: *
-Copyright: 2017 Ondřej Tůma <mcbig@zeropage.cz>
-           2017 Petr Šimčík <petrsimi.org@gmail.com>
+Copyright: 2016-2017 Formiko Team.
+           2016-2017 Ondřej Tůma <mcbig@zeropage.cz>
+           2016-2017 Petr Šimčík <petrsimi.org@gmail.com>
 License: BSD-3-Clause
 
 Files: debian/*

@@ -12,7 +12,6 @@ Homepage: https://github.com/ondratu/formiko
 X-Python3-Version: >= 3.2
 Vcs-Git: https://github.com/ondratu/formiko-debian.git
 Vcs-Browser: https://github.com/ondratu/formiko-debian
-Testsuite: autopkgtest-pkg-python
 
 Package: formiko
 Architecture: all
