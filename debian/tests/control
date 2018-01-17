@@ -1,5 +1,6 @@
 Test-Command: formiko --help
 Depends: python3-all, formiko
+Restrictions: allow-stderr
 
 Test-Command: set -e ; for py in $(py3versions -r 2>/dev/null) ; do cd "$ADTTMP" ; echo "Testing with $py:" ; $py -c "import formiko; print(formiko)" ; done
 Depends: python3-all, formiko
