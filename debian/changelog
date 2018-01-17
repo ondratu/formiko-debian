@@ -1,6 +1,10 @@
 formiko (1.3.0-1) unstable; urgency=medium
 
-  * Upstream update
+  * New upstream release
+  * Bump Standards-Version
+  * Bump compat version
+  * New depends
+  * Base tests
 
  -- Ondřej Tůma <mcbig@zeropage.cz>  Tue, 16 Jan 2018 08:48:07 +0100
 
