@@ -19,6 +19,7 @@ Depends:
  gir1.2-gtksource-3.0,
  gir1.2-gtkspell3-3.0,
  gir1.2-webkit2-4.0,
+ librsvg2-common,
  python3-docutils,
  python3-gi,
  python3-recommonmark,
