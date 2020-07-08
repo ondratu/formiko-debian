@@ -5,6 +5,14 @@ formiko (1.4.3-1) unstable; urgency=medium
 
  -- Ondřej Tůma <mcbig@zeropage.cz>  Tue, 23 Jun 2020 08:38:21 +0200
 
+formiko (1.3.0-2) unstable; urgency=medium
+
+  * debian/control:
+    - Depends on librsvg2-common, the svg loader is needed and used to
+      be pulled in by indirect depends but isn't anymore
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Wed, 08 Jul 2020 11:17:35 +0200
+
 formiko (1.3.0-1) unstable; urgency=medium
 
   * New upstream release
