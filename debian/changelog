@@ -12,6 +12,10 @@ formiko (1.3.0-2) unstable; urgency=medium
     Repository-Browse.
   * Replace use of deprecated $ADTTMP with $AUTOPKGTEST_TMP.
 
+  [ Ondřej Tůma ]
+  * Mark test as superficial (see #974458)
+  * d/watch changed - pypi doesn't support signatures
+
  -- Ondřej Tůma <mcbig@zeropage.cz>  Tue, 25 May 2021 12:43:39 +0200
 
 formiko (1.3.0-1) unstable; urgency=medium
