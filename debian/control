@@ -3,7 +3,7 @@ Section: editors
 Priority: optional
 Maintainer: Ondřej Tůma <mcbig@zeropage.cz>
 Build-Depends:
- debhelper-compat (= 12),
+ debhelper (>= 11),
  dh-python,
  python3-all,
  python3-docutils,
