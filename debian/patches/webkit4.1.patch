@@ -1,0 +1,28 @@
+From: Jeremy Bicha <jeremy.bicha@canonical.com>
+Date: Mon, 29 Aug 2022 13:44:13 -0400
+Subject: [PATCH] Allow webkitgtk 4.1
+
+webkitgtk 4.1 is the same as 4.0 except that it uses libsoup3
+instead of libsoup2.4
+
+https://github.com/ondratu/formiko/pull/40
+---
+ formiko/renderer.py | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/formiko/renderer.py b/formiko/renderer.py
+index 1afe064..c4e8e41 100644
+--- a/formiko/renderer.py
++++ b/formiko/renderer.py
+@@ -14,7 +14,10 @@
+ from docutils.writers.pep_html import Writer as WriterPep
+ 
+ from gi import require_version
+-require_version('WebKit2', '4.0')   # noqa
++try:
++    require_version('WebKit2', '4.1')   # noqa
++except ValueError:
++    require_version('WebKit2', '4.0')   # noqa
+ 
+ from gi.repository.WebKit2 import WebView, PrintOperation, FindOptions, \
+     LoadEvent # noqa
