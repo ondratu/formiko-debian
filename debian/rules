@@ -6,9 +6,11 @@
 export PYBUILD_NAME=formiko
 
 %:
-	dh $@ --with python3 --buildsystem=pybuild
+	dh $@ --buildsystem=pybuild
 
-override_dh_install:
-	dh_install
+override_dh_auto_test:
+	dh_auto_test -- --test-pytest
+
+execute_after_dh_install:
 	$(RM) $(CURDIR)/debian/formiko/usr/share/doc/formiko/COPYING
 	$(RM) $(CURDIR)/debian/formiko/usr/share/doc/formiko/ChangeLog

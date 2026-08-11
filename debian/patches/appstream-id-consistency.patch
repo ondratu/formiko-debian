@@ -1,0 +1,257 @@
+From: Ondřej Tůma <mcbig@zeropage.cz>
+Date: Tue, 11 Aug 2026 16:26:46 +0200
+Subject: Align desktop/metainfo filenames with the AppStream component ID
+
+The metainfo file declares the component id cz.zeropage.Formiko and its
+<launchable> element points to cz.zeropage.Formiko.desktop, but the
+shipped files are still named formiko.desktop and formiko.metainfo.xml.
+
+Per current GNOME/freedesktop AppStream conventions the desktop entry
+and metainfo basenames must match the component id, in *every*
+distribution channel (native package or Flatpak alike) so that desktop
+environments can correctly associate and deduplicate the launcher.
+This also fixes two screenshot URLs that were using plain http://.
+
+Reported upstream: https://github.com/ondratu/formiko/issues
+Bug-Debian: (appstream-metadata-validation-failed, metainfo-filename-cid-mismatch)
+Forwarded: yes
+---
+diff --git a/MANIFEST.in b/MANIFEST.in
+index 0412bc3..045fb03 100644
+--- a/MANIFEST.in
++++ b/MANIFEST.in
+@@ -4,7 +4,7 @@ include README.rst
+ include COPYING
+ include AUTHORS
+ include ChangeLog
+-include formiko.desktop
++include cz.zeropage.Formiko.desktop
+ include formiko-vim.desktop
+ include formiko.rst
+ include formiko-vim.rst
+diff --git a/cz.zeropage.Formiko.desktop b/cz.zeropage.Formiko.desktop
+new file mode 100644
+index 0000000..5a3a917
+--- /dev/null
++++ b/cz.zeropage.Formiko.desktop
+@@ -0,0 +1,11 @@
++[Desktop Entry]
++Type=Application
++Name=Formiko
++Comment=reStructuredText and MarkDown editor and live html previewer
++Exec=formiko %f
++Icon=formiko
++StartupWMClass=cz.zeropage.Formiko
++Terminal=false
++MimeType=text/plain;text/html;text/x-markdown;text/x-rst;application/json;text/json;
++Categories=Office;WordProcessor;GNOME;GTK;
++Keywords=Text;Editor;MarkDown;reStructuredText;Documentation;Markup;
+diff --git a/cz.zeropage.Formiko.metainfo.xml b/cz.zeropage.Formiko.metainfo.xml
+new file mode 100644
+index 0000000..6411d4a
+--- /dev/null
++++ b/cz.zeropage.Formiko.metainfo.xml
+@@ -0,0 +1,77 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!-- Copyright 2026 Ondřej Tůma -->
++<component type="desktop-application">
++    <id>cz.zeropage.Formiko</id>
++    <name>Formiko</name>
++    <summary>reStructuredText and Markdown editor</summary>
++    <provides>
++        <mediatype>text/plain</mediatype>
++        <mediatype>text/html</mediatype>
++        <mediatype>text/x-markdown</mediatype>
++        <mediatype>text/x-rst</mediatype>
++        <mediatype>application/json</mediatype>
++        <mediatype>text/json</mediatype>
++    </provides>
++    <content_rating type="oars-1.1"/>
++    <requires>
++        <id version="47" compare="ge">org.gnome.Platform</id>
++    </requires>
++    <releases>
++        <release version="2.0.0" type="stable" date="2026-08-11">
++            <url>https://github.com/ondratu/formiko/releases/tag/2.0.0</url>
++        </release>
++        <release version="1.5.0" type="stable" date="2024-11-14">
++            <url>https://github.com/ondratu/formiko/releases/tag/1.5.0</url>
++        </release>
++        <release version="1.4.3" type="stable" date="2019-12-10">
++            <url>https://github.com/ondratu/formiko/releases/tag/1.4.3</url>
++        </release>
++        <release version="1.4.2" type="stable" date="2019-12-02">
++            <url>https://github.com/ondratu/formiko/releases/tag/1.4.2</url>
++        </release>
++        <release version="1.4.0" type="stable" date="2019-11-06">
++            <url>https://github.com/ondratu/formiko/releases/tag/1.4.0</url>
++        </release>
++    </releases>
++    <url type="homepage">https://formiko.zeropage.cz</url>
++    <url type="bugtracker">https://github.com/ondratu/formiko/issues</url>
++    <url type="vcs-browser">https://formiko.zeropage.cz</url>
++    <launchable type="desktop-id">cz.zeropage.Formiko.desktop</launchable>
++    <metadata_license>MIT</metadata_license>
++    <project_license>BSD-3-Clause</project_license>
++    <description>
++        <p>Formiko is a reStructuredText and Markdown editor and live previewer.
++        It is written in Python with GTK4, libadwaita, GtkSourceView and WebKit. Uses
++        Docutils and m2r2 Markdown parser.</p>
++        <p>Features:</p>
++        <ul>
++            <li>GtkSourceView based editor with syntax highlighting</li>
++            <li>Optional Vim editor support</li>
++            <li>Vertical or horizontal window splitting</li>
++            <li>Preview mode with auto scroll</li>
++            <li>Periodic file save</li>
++            <li>JSON and HTML preview</li>
++            <li>Spell check</li>
++            <li>Linked file opening</li>
++        </ul>
++    </description>
++    <screenshots>
++      <screenshot type="default" width="1000" height="700">
++        <caption>Main window showing the editor and live preview side by side.</caption>
++        <image>https://formiko.zeropage.cz/assets/gtk4.png</image>
++      </screenshot>
++      <screenshot width="1260" height="700">
++        <caption>JSON file rendered in the built-in preview.</caption>
++        <image>https://formiko.zeropage.cz/assets/json.png</image>
++      </screenshot>
++
++    </screenshots>
++    <branding>
++      <color type="primary" scheme_preference="light">#ebebeb</color>
++      <color type="primary" scheme_preference="dark">#828282</color>
++    </branding>
++    <developer id="cz.zeropage">
++      <name>Ondřej Tůma</name>
++    </developer>
++    <update_contact>mcbig@zeropage.cz</update_contact>
++</component>
+diff --git a/formiko.desktop b/formiko.desktop
+deleted file mode 100644
+index 5a3a917..0000000
+--- a/formiko.desktop
++++ /dev/null
+@@ -1,11 +0,0 @@
+-[Desktop Entry]
+-Type=Application
+-Name=Formiko
+-Comment=reStructuredText and MarkDown editor and live html previewer
+-Exec=formiko %f
+-Icon=formiko
+-StartupWMClass=cz.zeropage.Formiko
+-Terminal=false
+-MimeType=text/plain;text/html;text/x-markdown;text/x-rst;application/json;text/json;
+-Categories=Office;WordProcessor;GNOME;GTK;
+-Keywords=Text;Editor;MarkDown;reStructuredText;Documentation;Markup;
+diff --git a/formiko.metainfo.xml b/formiko.metainfo.xml
+deleted file mode 100644
+index 74693f4..0000000
+--- a/formiko.metainfo.xml
++++ /dev/null
+@@ -1,77 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<!-- Copyright 2026 Ondřej Tůma -->
+-<component type="desktop-application">
+-    <id>cz.zeropage.Formiko</id>
+-    <name>Formiko</name>
+-    <summary>reStructuredText and Markdown editor</summary>
+-    <provides>
+-        <mediatype>text/plain</mediatype>
+-        <mediatype>text/html</mediatype>
+-        <mediatype>text/x-markdown</mediatype>
+-        <mediatype>text/x-rst</mediatype>
+-        <mediatype>application/json</mediatype>
+-        <mediatype>text/json</mediatype>
+-    </provides>
+-    <content_rating type="oars-1.1"/>
+-    <requires>
+-        <id version="47" compare="ge">org.gnome.Platform</id>
+-    </requires>
+-    <releases>
+-        <release version="2.0.0" type="stable" date="2026-08-11">
+-            <url>https://github.com/ondratu/formiko/releases/tag/2.0.0</url>
+-        </release>
+-        <release version="1.5.0" type="stable" date="2024-11-14">
+-            <url>https://github.com/ondratu/formiko/releases/tag/1.5.0</url>
+-        </release>
+-        <release version="1.4.3" type="stable" date="2019-12-10">
+-            <url>https://github.com/ondratu/formiko/releases/tag/1.4.3</url>
+-        </release>
+-        <release version="1.4.2" type="stable" date="2019-12-02">
+-            <url>https://github.com/ondratu/formiko/releases/tag/1.4.2</url>
+-        </release>
+-        <release version="1.4.0" type="stable" date="2019-11-06">
+-            <url>https://github.com/ondratu/formiko/releases/tag/1.4.0</url>
+-        </release>
+-    </releases>
+-    <url type="homepage">https://formiko.zeropage.cz</url>
+-    <url type="bugtracker">https://github.com/ondratu/formiko/issues</url>
+-    <url type="vcs-browser">https://formiko.zeropage.cz</url>
+-    <launchable type="desktop-id">cz.zeropage.Formiko.desktop</launchable>
+-    <metadata_license>MIT</metadata_license>
+-    <project_license>BSD-3-Clause</project_license>
+-    <description>
+-        <p>Formiko is a reStructuredText and Markdown editor and live previewer.
+-        It is written in Python with GTK4, libadwaita, GtkSourceView and WebKit. Uses
+-        Docutils and m2r2 Markdown parser.</p>
+-        <p>Features:</p>
+-        <ul>
+-            <li>GtkSourceView based editor with syntax highlighting</li>
+-            <li>Optional Vim editor support</li>
+-            <li>Vertical or horizontal window splitting</li>
+-            <li>Preview mode with auto scroll</li>
+-            <li>Periodic file save</li>
+-            <li>JSON and HTML preview</li>
+-            <li>Spell check</li>
+-            <li>Linked file opening</li>
+-        </ul>
+-    </description>
+-    <screenshots>
+-      <screenshot type="default" width="1000" height="700">
+-        <caption>Main window showing the editor and live preview side by side.</caption>
+-        <image>http://formiko.zeropage.cz/assets/gtk4.png</image>
+-      </screenshot>
+-      <screenshot width="1260" height="700">
+-        <caption>JSON file rendered in the built-in preview.</caption>
+-        <image>http://formiko.zeropage.cz/assets/json.png</image>
+-      </screenshot>
+-
+-    </screenshots>
+-    <branding>
+-      <color type="primary" scheme_preference="light">#ebebeb</color>
+-      <color type="primary" scheme_preference="dark">#828282</color>
+-    </branding>
+-    <developer id="cz.zeropage">
+-      <name>Ondřej Tůma</name>
+-    </developer>
+-    <update_contact>mcbig@zeropage.cz</update_contact>
+-</component>
+diff --git a/setup.py b/setup.py
+index 50b57ad..186d4f2 100644
+--- a/setup.py
++++ b/setup.py
+@@ -221,8 +221,8 @@ class CheckVersion(Command):
+             return None
+ 
+     def read_metainfo(self):
+-        """Read last version from formiko.metainfo.xml."""
+-        with open("formiko.metainfo.xml", encoding="utf-8") as meta:
++        """Read last version from cz.zeropage.Formiko.metainfo.xml."""
++        with open("cz.zeropage.Formiko.metainfo.xml", encoding="utf-8") as meta:
+             for line in meta:
+                 if "<release " in line:
+                     vals = dict(
+@@ -239,8 +239,8 @@ setup(
+             "share/doc/formiko",
+             ["README.rst", "COPYING", "ChangeLog", "AUTHORS"],
+         ),
+-        ("share/applications", ["formiko.desktop", "formiko-vim.desktop"]),
+-        ("share/metainfo", ["formiko.metainfo.xml"]),
++        ("share/applications", ["cz.zeropage.Formiko.desktop", "formiko-vim.desktop"]),
++        ("share/metainfo", ["cz.zeropage.Formiko.metainfo.xml"]),
+         ("share/formiko/icons", ["icons/formiko.svg"]),
+         *icons_data(),
+     ],

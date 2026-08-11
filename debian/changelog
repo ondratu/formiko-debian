@@ -1,3 +1,35 @@
+formiko (2.0.0-1) unstable; urgency=medium
+
+  * New upstream release (2.0.0), a major rewrite ported to GTK4,
+    libadwaita and GtkSourceView 5:
+    - Replace WebKit2GTK 4.1 with WebKit 6.0 (GTK4)
+    - Replace gtkspell3 spell checking with libspelling
+    - Drop recommonmark in favour of built-in Markdown handling
+    - Add jsonpath-ng runtime dependency
+    - Add optional neovim (vte), spelling and extra-writers integration
+  * debian/control:
+    - Bump debhelper-compat to 14, Standards-Version to 4.7.4
+    - Add Rules-Requires-Root: no
+    - Add dh-sequence-python3, dh-sequence-single-binary and
+      python3-pytest to Build-Depends, required with compat 14
+    - Refresh Build-Depends/Depends/Recommends/Suggests for the GTK4
+      rewrite (gir1.2-gtk-4.0, gir1.2-adw-1, gir1.2-gtksource-5,
+      gir1.2-webkit-6.0, python3-jsonpath-ng, gir1.2-spelling-1,
+      gir1.2-vte-3.91, python3-m2r2, python3-pygments, python3-pynvim)
+    - Drop the X-Python3-Version field (lintian
+      drop-python-version-declaration)
+  * debian/rules: simplify to compat 14 style (execute_after_dh_install),
+    run the upstream pytest suite during build (dh_auto_test)
+  * debian/copyright: refresh copyright years
+  * debian/patches:
+    - Drop webkit4.1.patch, obsoleted by the upstream rewrite of
+      formiko/renderer.py
+    - Add appstream-id-consistency.patch to align the desktop entry
+      and metainfo file basenames with the AppStream component id
+      (cz.zeropage.Formiko), fixing appstream-metadata-validation-failed
+
+ -- Ondřej Tůma <mcbig@zeropage.cz>  Tue, 11 Aug 2026 16:26:46 +0200
+
 formiko (1.4.3-2.1) unstable; urgency=medium
 
   * Non-maintainer upload (Closes: #993069)
