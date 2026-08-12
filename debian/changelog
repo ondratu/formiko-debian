@@ -1,7 +1,7 @@
 formiko (2.0.0-1) unstable; urgency=medium
 
   * New upstream release (2.0.0), a major rewrite ported to GTK4,
-    libadwaita and GtkSourceView 5:
+    libadwaita and GtkSourceView 5 (Closes: #1079410):
     - Replace WebKit2GTK 4.1 with WebKit 6.0 (GTK4)
     - Replace gtkspell3 spell checking with libspelling
     - Drop recommonmark in favour of built-in Markdown handling
@@ -12,6 +12,10 @@ formiko (2.0.0-1) unstable; urgency=medium
     - Add Rules-Requires-Root: no
     - Add dh-sequence-python3, dh-sequence-single-binary and
       python3-pytest to Build-Depends, required with compat 14
+    - Add python3-gi, gir1.2-adw-1, gir1.2-gtksource-5 and
+      gir1.2-webkit-6.0 to Build-Depends: the upstream pytest suite
+      imports them at collection time, which a clean sbuild chroot
+      caught but an already-populated dev machine did not
     - Refresh Build-Depends/Depends/Recommends/Suggests for the GTK4
       rewrite (gir1.2-gtk-4.0, gir1.2-adw-1, gir1.2-gtksource-5,
       gir1.2-webkit-6.0, python3-jsonpath-ng, gir1.2-spelling-1,
