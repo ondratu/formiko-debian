@@ -24,7 +24,7 @@ formiko (2.0.0-1) unstable; urgency=medium
       drop-python-version-declaration)
   * debian/rules: simplify to compat 14 style (execute_after_dh_install),
     run the upstream pytest suite during build (dh_auto_test)
-  * debian/copyright: refresh copyright years
+  * debian/copyright: refresh copyright years, add Upstream-Contact
   * debian/patches:
     - Drop webkit4.1.patch, obsoleted by the upstream rewrite of
       formiko/renderer.py

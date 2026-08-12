@@ -1,5 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: formiko
+Upstream-Contact: Ondřej Tůma <mcbig@zeropage.cz>
 Source: https://github.com/ondratu/formiko
 
 Files: *
