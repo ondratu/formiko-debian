@@ -1,0 +1,9 @@
+usr/bin/formiko
+usr/lib/python3*/dist-packages/formiko/*
+usr/lib/python3*/dist-packages/formiko-*.egg-info/*
+usr/share/applications/cz.zeropage.Formiko.desktop
+usr/share/doc/formiko/*
+usr/share/formiko/
+usr/share/icons/
+usr/share/man/man1/formiko.1.gz
+usr/share/metainfo/

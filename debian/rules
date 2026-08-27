@@ -3,13 +3,15 @@
 # output every command that modifies files on the build system.
 #export DH_VERBOSE = 1
 
-export PYBUILD_NAME=formiko
-
 %:
 	dh $@ --buildsystem=pybuild
 
 override_dh_auto_test:
 	dh_auto_test -- --test-pytest
+
+override_dh_installdocs:
+	dh_installdocs -pformiko
+	dh_installdocs -pformiko-vim --link-doc=formiko
 
 execute_after_dh_install:
 	$(RM) $(CURDIR)/debian/formiko/usr/share/doc/formiko/COPYING

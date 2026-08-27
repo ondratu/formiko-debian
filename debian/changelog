@@ -1,3 +1,30 @@
+formiko (2.0.0-2) unstable; urgency=medium
+
+  * debian/control: split formiko-vim into its own binary package
+    (Closes: #1145686)
+    - New formiko-vim package ships the formiko-vim binary, its
+      .desktop file and man page, with an explicit Depends on
+      formiko (= ${binary:Version}) and python3-pynvim: pynvim was
+      previously only a Suggests on formiko, so the Vim mode silently
+      failed to work without it
+    - formiko no longer ships the formiko-vim binary, .desktop file
+      or man page
+    - Move python3-m2r2 and python3-pygments from Suggests to
+      Recommends for formiko: they are small and worth having
+      installed by default
+    - Drop Suggests entirely (python3-pynvim is now a hard Depends
+      of formiko-vim instead)
+    - Add Breaks/Replaces (<< 2.0.0-2~) on formiko-vim for the files
+      moved out of formiko
+    - Drop dh-sequence-single-binary from Build-Depends, required
+      now that the source builds two binary packages
+  * debian/rules: add formiko.install/formiko-vim.install to split
+    the pybuild install tree between the two packages; override
+    dh_installdocs so formiko-vim's doc directory is a symlink to
+    formiko's
+
+ -- Ondřej Tůma <mcbig@zeropage.cz>  Thu, 27 Aug 2026 10:05:01 +0200
+
 formiko (2.0.0-1) unstable; urgency=medium
 
   * New upstream release (2.0.0), a major rewrite ported to GTK4,

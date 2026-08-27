@@ -6,7 +6,6 @@ Build-Depends:
  debhelper-compat (= 14),
  dh-python,
  dh-sequence-python3,
- dh-sequence-single-binary,
  gir1.2-adw-1,
  gir1.2-gtksource-5,
  gir1.2-webkit-6.0,
@@ -37,15 +36,38 @@ Depends:
 Recommends:
  gir1.2-spelling-1,
  gir1.2-vte-3.91,
-Suggests:
  python3-m2r2,
  python3-pygments,
- python3-pynvim,
 Description: reStructuredText and MarkDown editor and live previewer
- Features:
-  * GtkSourceView based editor with syntax highlighting
-  * possible use Vim editor
+ Formiko is a reStructuredText and MarkDown editor and live previewer.
+ .
+ Common features:
   * vertical or horizontal window splitting
   * preview mode
   * periodic save file
   * json and html preview
+ .
+ This package provides the formiko binary, which uses a GtkSourceView
+ based editor with syntax highlighting. For an embedded Neovim editor,
+ also install formiko-vim.
+
+Package: formiko-vim
+Architecture: all
+Depends:
+ formiko (= ${binary:Version}),
+ python3-pynvim,
+ ${misc:Depends},
+ ${python3:Depends},
+Breaks: formiko (<< 2.0.0-2~)
+Replaces: formiko (<< 2.0.0-2~)
+Description: reStructuredText and MarkDown editor and live previewer - Vim mode
+ Formiko is a reStructuredText and MarkDown editor and live previewer.
+ .
+ Common features:
+  * vertical or horizontal window splitting
+  * preview mode
+  * periodic save file
+  * json and html preview
+ .
+ This package provides the formiko-vim binary, which embeds Neovim as
+ its editor instead of GtkSourceView.
