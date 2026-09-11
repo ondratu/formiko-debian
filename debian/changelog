@@ -1,3 +1,13 @@
+formiko (2.0.0-3) unstable; urgency=medium
+
+  * debian/patches: add pynvim-optional-import.patch, fixing a startup
+    crash of formiko (without formiko-vim) when python3-pynvim is not
+    installed but gir1.2-vte-3.91 is (Recommends installs it by
+    default); backported from upstream commit
+    7ac2d9dc203ad60f796cb9c97efec6da51bee37b
+
+ -- Ondřej Tůma <mcbig@zeropage.cz>  Fri, 11 Sep 2026 08:13:04 +0200
+
 formiko (2.0.0-2) unstable; urgency=medium
 
   * debian/control: split formiko-vim into its own binary package

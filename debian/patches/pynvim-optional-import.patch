@@ -1,0 +1,43 @@
+From: Ondřej Tůma <mcbig@zeropage.cz>
+Date: Fri, 11 Sep 2026 00:00:00 +0200
+Subject: Do not crash on startup when python3-pynvim is not installed
+
+formiko/__main__.py always tries gi.require_version("Vte", "3.91"),
+which succeeds whenever the gir1.2-vte-3.91 typelib is installed (a
+Recommends of the formiko package, so installed by default). Because
+document_page.py only checked gi.get_required_version("Vte") before
+importing formiko.vim, and formiko.vim imports pynvim unconditionally,
+formiko fails to start with "ModuleNotFoundError: No module named
+'pynvim'" on any system that has the formiko package installed
+without formiko-vim (which is the only package depending on
+python3-pynvim since the formiko-vim split).
+
+Catch the missing-pynvim case and treat Vim editor support as simply
+unavailable, the same way it already behaves when Vte itself is
+missing.
+
+Bug: https://github.com/ondratu/formiko/issues/32
+Origin: backport, https://github.com/ondratu/formiko/commit/7ac2d9dc203ad60f796cb9c97efec6da51bee37b
+Forwarded: not-needed
+---
+ formiko/document_page.py | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/formiko/document_page.py b/formiko/document_page.py
+index c0e3e76..6eaf78e 100644
+--- a/formiko/document_page.py
++++ b/formiko/document_page.py
+@@ -18,7 +18,12 @@ from formiko.user import UserPreferences, View
+ from formiko.widgets import ImutableDict
+
+ if get_required_version("Vte"):
+-    from formiko.vim import VimEditor
++    try:
++        from formiko.vim import VimEditor
++    except ModuleNotFoundError as error:
++        if error.name != "pynvim":
++            raise
++        VimEditor = None
+
+ RE_WORD = re.compile(r"([\w]+)", re.U)
+ RE_CHAR = re.compile(r'[\w \t\.,\?\(\)"\']', re.U)
