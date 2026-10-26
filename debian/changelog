@@ -27,6 +27,9 @@ formiko (2.0.0-2) unstable; urgency=medium
     the pybuild install tree between the two packages; override
     dh_installdocs so formiko-vim's doc directory is a symlink to
     formiko's
+  * debian/rules: run the test suite only with the default Python
+    version: python3-gi has no _gi extension for Python 3.15 yet, which
+    made the build fail
 
  -- Ondřej Tůma <mcbig@zeropage.cz>  Fri, 11 Sep 2026 08:13:04 +0200
 

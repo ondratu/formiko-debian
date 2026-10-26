@@ -6,8 +6,17 @@
 %:
 	dh $@ --buildsystem=pybuild
 
+# python3-gi may lack the _gi extension for non-default Python versions
+# (e.g. 3.15 during a transition), so run the tests with the default only
+NON_DEFAULT_PY = $(filter-out $(shell py3versions -dv),$(shell py3versions -sv))
+
 override_dh_auto_test:
+ifneq ($(NON_DEFAULT_PY),)
+	PYBUILD_DISABLE="test/python$(subst $() ,$() python,$(NON_DEFAULT_PY))" \
+		dh_auto_test -- --test-pytest
+else
 	dh_auto_test -- --test-pytest
+endif
 
 override_dh_installdocs:
 	dh_installdocs -pformiko
