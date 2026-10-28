@@ -14,7 +14,7 @@ This also fixes two screenshot URLs that were using plain http://.
 
 Reported upstream: https://github.com/ondratu/formiko/issues
 Bug-Debian: (appstream-metadata-validation-failed, metainfo-filename-cid-mismatch)
-Forwarded: yes
+Applied-Upstream: https://github.com/ondratu/formiko/commit/4f41b814364f7161d8e94d89f8601f6dae30f9c7
 ---
 diff --git a/MANIFEST.in b/MANIFEST.in
 index 0412bc3..045fb03 100644
