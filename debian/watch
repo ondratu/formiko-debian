@@ -1,5 +1,5 @@
-# Compulsory line, this is a version 4 file
-version=4
+Version: 5
 
-opts=uversionmangle=s/(rc|a|b|c)/~$1/ \
-https://pypi.debian.net/formiko/formiko-(.+)\.(?:zip|tgz|tbz|txz|(?:tar\.(?:gz|bz2|xz)))
+Source: https://pypi.debian.net/formiko/
+Matching-Pattern: formiko-(.+)\.(?:zip|tgz|tbz|txz|(?:tar\.(?:gz|bz2|xz)))
+Uversionmangle: s/(rc|a|b|c)/~$1/
