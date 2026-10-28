@@ -1,3 +1,14 @@
+formiko (2.0.0-3) UNRELEASED; urgency=medium
+
+  * debian/copyright: make the MIT stanza match the metainfo file
+    both before and after appstream-id-consistency.patch renames it
+  * debian/copyright: use upstream's wording of BSD-3-Clause clause 3
+  * debian/watch: switch to format version 5
+  * debian/patches: mark appstream-id-consistency.patch as applied
+    upstream (to be dropped with the next upstream release)
+
+ -- Ondřej Tůma <mcbig@zeropage.cz>  Wed, 28 Oct 2026 10:11:06 +0100
+
 formiko (2.0.0-2) unstable; urgency=medium
 
   * debian/patches: add pynvim-optional-import.patch, fixing a startup
